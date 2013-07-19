@@ -1,9 +1,9 @@
 {
-  "name": "math-expressions",
+  "name": "equation",
   "version": "0.0.1",
   "main": "./index.js",
   "author": "Lance Pollard <lancejpollard@gmail.com>",
   "dependencies": {
-    "tower-expression": "*"
+    "tower-expressions": "*"
   }
 }
