@@ -1,6 +1,6 @@
 # Math Expressions
 
-[![experimental](https://raw.github.com/hughsk/stability-badges/master/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
+[![experimental](https://rawgithub.com/hughsk/stability-badges/master/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
 ## Installation
 
