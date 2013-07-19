@@ -52,19 +52,31 @@ expression('math')
   .match(':summation');
 
 expression('summation')
-  .match('∑', '↙', ':latex-group', '↖', ':latex-group', ':ws', ':latex-function', function($1, $2, $3, $4, $5, $6, $7){
-    return { type: 'summation', index: $3, upper: $5, fn: $7 };
+  .match('∑', '↙', ':below-summation', '↖', ':above-summation', ':ws', ':latex-function', function($1, $2, $3, $4, $5, $6, $7){
+    return { type: 'summation', top: $5, bottom: $3, fn: $7 };
+  });
+
+expression('math-conditional')
+  .match(/[a-zA-Z]+/, ':math-operator', /[\d]+/, function($1, $2, $3){
+    return { left: $1, operator: $2, right: $3 };
   });
 
 expression('latex-function')
   .match('i');
 
-expression('latex-group')
-  .match('{', ':latex-expression', '}', function($1, $2, $3){
+expression('below-summation')
+  .match('{', ':math-conditional', '}', function($1, $2, $3){
     return $2;
   })
-  .match(':latex-expression');
+  .match(':math-conditional');
 
-expression('latex-expression')
-  .match('i=1')
+expression('above-summation')
   .match('n');
+
+expression('math-operator')
+  .match('=')
+  .match(':element-of')
+  .match(':contains');
+
+expression('element-of').match('∈');
+expression('contains').match('∋');

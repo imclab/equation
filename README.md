@@ -7,24 +7,25 @@
 node.js:
 
 ```bash
-npm install math-expressions
+npm install equation
 ```
 
 browser:
 
 ```bash
-component install math-expressions
+component install equation
 ```
 
 ## Example
 
 ```js
-var math = require('math-expressions');
+var math = require('equation');
 ```
 
 ## Notes
 
 - http://mathscribe.com/author/jqmath.html
+- http://en.wikipedia.org/wiki/List_of_mathematical_symbols
 
 ## Licence
 
