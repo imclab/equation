@@ -53,7 +53,7 @@ expression('math')
 
 expression('summation')
   .match('∑', '↙', ':below-summation', '↖', ':above-summation', ':ws', ':latex-function', function($1, $2, $3, $4, $5, $6, $7){
-    return { type: 'summation', top: $5, bottom: $3, fn: $7 };
+    return { type: 'summation', overscript: $5, underscript: $3, fn: $7 };
   });
 
 expression('math-conditional')
@@ -80,3 +80,29 @@ expression('math-operator')
 
 expression('element-of').match('∈');
 expression('contains').match('∋');
+
+expression('math-expression')
+  .match(':math-conditional');
+
+expression('superscript')
+  .match('^', ':math-expression');
+
+expression('subscript')
+  .match('_', ':symbol');
+
+// http://en.wikipedia.org/wiki/Trigonometric_functions
+expression('trig-function')
+  .match(':trig-name', ':math-expression');
+
+expression('trig-name')
+  .match('sin')
+  .match('cos')
+  .match('tan');
+
+expression('symbol')
+  .match(/[a-zA-Z0-9]/+);
+
+expression('math-function')
+  .match('f(x+h)-f(x)');
+
+// $v↖{→}⋅w↖{→} = vw\cos θ$  
