@@ -16,4 +16,13 @@ describe('math expressions', function(){
     var exp = expression('summation').parse('∑↙{i=1}↖n i');
     console.log(exp);
   });
+
+  it('trig-function', function(){
+    var exp = expression('trig-function').parse('sinΘ');
+    console.log(exp);
+    var exp = expression('trig-function').parse('sin75°');
+    console.log(exp);
+    var exp = expression('trig-function').parse('sin(π/4)');
+    console.log(exp);
+  });
 });

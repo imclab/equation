@@ -6,21 +6,21 @@
 var expression = require('tower-expressions');
 
 /**
- * Expose `math`.
+ * Expose `equation`.
  */
 
-module.exports = math;
+module.exports = equation;
 
 /**
- * A one-liner.
+ * Equation parser.
  *
- * @param {String} name
+ * @param {String} str Mathematical expression.
  * @return {Function}
  * @api public
  */
 
-function math(str) {
-  var exp = expression('math').parse(str);
+function equation(str) {
+  var exp = expression('equation').parse(str);
   
   switch (exp.type) {
     case 'summation':
@@ -48,7 +48,7 @@ function summationFn(exp) {
  * Expressions.
  */
 
-expression('math')
+expression('equation')
   .match(':summation');
 
 expression('summation')
@@ -82,7 +82,15 @@ expression('element-of').match('∈');
 expression('contains').match('∋');
 
 expression('math-expression')
-  .match(':math-conditional');
+  .match(':math-conditional')
+  .match(':math-function')
+  .match(':division')
+  .match(':symbol');
+
+expression('math-function')
+  .match('(', ':math-expression', ')', function($1, $2){
+    return { type: 'function', value: $2 };
+  });
 
 expression('superscript')
   .match('^', ':math-expression');
@@ -90,9 +98,16 @@ expression('superscript')
 expression('subscript')
   .match('_', ':symbol');
 
+expression('division')
+  .match(':symbol', '/', ':symbol', function($1, $2, $3){
+    return { left: $1, operator: $2, right: $3 };
+  });
+
 // http://en.wikipedia.org/wiki/Trigonometric_functions
 expression('trig-function')
-  .match(':trig-name', ':math-expression');
+  .match(':trig-name', ':math-expression', function($1, $2){
+    return { type: $1, value: $2 };
+  });
 
 expression('trig-name')
   .match('sin')
@@ -100,9 +115,14 @@ expression('trig-name')
   .match('tan');
 
 expression('symbol')
-  .match(/[a-zA-Z0-9]/+);
+  .match(/\d+/, '°', function($1){
+    return { type: 'degree', value: $1 };
+  })
+  .match(/[^\.,\?\)\(\/]+/);
 
-expression('math-function')
-  .match('f(x+h)-f(x)');
-
-// $v↖{→}⋅w↖{→} = vw\cos θ$  
+/**
+ * |w| = |a1 ···ak| = k.
+ * $v↖{→}⋅w↖{→} = vw\cos θ$ 
+ * C =c(A)={c(a)|a∈A}
+ * R(v) = B1B2 ···B⌈k/6⌉ (3.3)
+ */

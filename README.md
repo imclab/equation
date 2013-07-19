@@ -28,6 +28,7 @@ assert(5050 === sum({ n: 100 }));
 
 - http://mathscribe.com/author/jqmath.html
 - http://en.wikipedia.org/wiki/List_of_mathematical_symbols
+- [The Structure of Mathematical Expressions](http://kwarc.info/people/dginev/publications/DeyanGinev_MScThesis.pdf)
 
 ## Licence
 
