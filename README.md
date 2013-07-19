@@ -21,7 +21,7 @@ component install equation
 ```js
 var equation = require('equation');
 var sum = equation('∑↙{i=1}↖n i');
-assert(5050 === sum(100));
+assert(5050 === sum({ n: 100 }));
 ```
 
 ## Notes
