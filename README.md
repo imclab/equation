@@ -1,4 +1,4 @@
-# Math Expressions
+# Equation parser
 
 [![experimental](https://rawgithub.com/hughsk/stability-badges/master/dist/experimental.svg)](http://github.com/hughsk/stability-badges)
 
@@ -19,7 +19,9 @@ component install equation
 ## Example
 
 ```js
-var math = require('equation');
+var equation = require('equation');
+var sum = equation('∑↙{i=1}↖n i');
+assert(5050 === sum(100));
 ```
 
 ## Notes
